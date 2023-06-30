@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+<script>
+function initComparisons() {
+  var x, i;
+  /*find all elements with an "overlay" class:*/
+  x = document.getElementsByClassName("img-comp-overlay");
+  for (i = 0; i < x.length; i++) {
+    /*once for each "overlay" element:
+    pass the "overlay" element as a parameter when executing the compareImages function:*/
+    compareImages(x[i]);
+  }
+  function compareImages(img) {
+    var slider, img, clicked = 0, w, h;
+    /*get the width and height of the img element*/
+    w = img.offsetWidth;
+    h = img.offsetHeight;
+    /*set the width of the img element to 50%:*/
+    img.style.width = (w / 2) + "px";
+    /*create slider:*/
+    slider = document.createElement("DIV");
+    slider.setAttribute("class", "img-comp-slider");
+    /*insert slider*/
+    img.parentElement.insertBefore(slider, img);
+    /*position the slider in the middle:*/
+    slider.style.top = "90px";
+    slider.style.left = "130px";
+    /*execute a function when the mouse button is pressed:*/
+    slider.addEventListener("mousedown", slideReady);
+    /*and another function when the mouse button is released:*/
+    window.addEventListener("mouseup", slideFinish);
+    /*or touched (for touch screens:*/
+    slider.addEventListener("touchstart", slideReady);
+    /*and released (for touch screens:*/
+    window.addEventListener("touchend", slideFinish);
+    function slideReady(e) {
+      /*prevent any other actions that may occur when moving over the image:*/
+      e.preventDefault();
+      /*the slider is now clicked and ready to move:*/
+      clicked = 1;
+      /*execute a function when the slider is moved:*/
+      window.addEventListener("mousemove", slideMove);
+      window.addEventListener("touchmove", slideMove);
+    }
+    function slideFinish() {
+      /*the slider is no longer clicked:*/
+      clicked = 0;
+    }
+    function slideMove(e) {
+      var pos;
+      /*if the slider is no longer clicked, exit this function:*/
+      if (clicked == 0) return false;
+      /*get the cursor's x position:*/
+      pos = getCursorPos(e)
+      /*prevent the slider from being positioned outside the image:*/
+      if (pos < 0) pos = 0;
+      if (pos > w) pos = w;
+      /*execute a function that will resize the overlay image according to the cursor:*/
+      slide(pos);
+    }
+    function getCursorPos(e) {
+      var a, x = 0;
+      e = (e.changedTouches) ? e.changedTouches[0] : e;
+      /*get the x positions of the image:*/
+      a = img.getBoundingClientRect();
+      /*calculate the cursor's x coordinate, relative to the image:*/
+      x = e.pageX - a.left;
+      /*consider any page scrolling:*/
+      x = x - window.pageXOffset;
+      return x;
+    }
+    function slide(x) {
+      /*resize the image:*/
+      img.style.width = x + "px";
+      /*position the slider:*/
+      slider.style.left = img.offsetWidth - (slider.offsetWidth / 2) + "px";
+    }
+  }
+}
+</script>
+
+</head>
+<body>
+<!-- Sidebar -->
+<div id="mySidenav" class="sidenav">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+  <a id="myBtn">About</a>
+    <div id="myModal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <p>At Gsource, we are passionate about all things gaming. We strive to provide you with the latest information, insights, and updates about the most popular and trending games in the industry. Whether you're a casual gamer or a dedicated enthusiast, Gsource is your go-to destination for staying ahead of the gaming curve.
+        <br><br>
+        Stay Up-to-Date with Trending Games:
+        <br>
+        Our dedicated team of gaming enthusiasts scours the digital landscape to bring you the most relevant and exciting gaming news. We cover a wide range of genres, including action, adventure, role-playing, sports, strategy, and more. With Gsource, you'll always be in the know about upcoming game releases, gameplay mechanics, in-depth reviews, and captivating stories that surround the gaming world.
+        <br><br>
+        Discover New Adventures:
+        <br>
+        Looking for your next gaming obsession? Gsource is here to help. Our platform features curated lists of trending games, highlighting hidden gems and highly anticipated titles. We believe that every gamer deserves a thrilling experience, and our expert recommendations will guide you towards unforgettable adventures.</p>
+      </div>
+    </div>
+  <a href="services.html">Services</a>
+</div>
+
+<div class="topnav">
+  <a><span style="font-size:18px;cursor:pointer" onclick="openNav()">&#9776; </span></a>
+  <a><img alt="No description available." src="img\Gsource.png" width="70" height="15"></a>
+  <a href="login.html">Explore</a>
+  <a id="myBtn2">Upcoming</a>
+    <div id="myModal2" class="modal2">
+      <div class="modal-content2">
+        <span class="close2">&times;</span>
+        <p>Welcome to Gsource's releases section, your go-to destination for the latest gaming updates. Stay up-to-date with the hottest releases in the gaming world and discover new titles to dive into. Whether you're a casual gamer or a hardcore enthusiast, this is where you'll find the buzzworthy games that everyone's talking about.</p>
+      </div>
+    </div>
+
+  <div class="topnav-right">
+    <a href="login.html">Log In</a>
+    <a href="signup.html">Sign Up</a>
+  </div>
+
+    <div class="search-container">
+      <form action="#">
+        <input type="text" placeholder="Search.." name="search">
+        <button type="submit"><i class="fa fa-search"></i></button>
+      </form>
+    </div>
+</div>
+
+<div class="container">
+  <img src="img\Apex.jpg" width="100%" height="440px">
+  <div class="con-iframe">
+    <iframe src="https://www.youtube.com/embed/BTSlh_vgKeo" frameborder="0" allowfullscreen align="right" height="200px" width="400px"></iframe>
+  </div>
+  <div class="intro">
+        <h5 style="color: #E71D36;"><strong>&nbsp&nbsp&nbsp&nbsp EXPLORE NEW GAMES</strong></h5>
+        <h1><b>&nbsp Reinforce with Gsource</b></h1>
+  </div>
+  <div class="text-block">
+    <p><a href="login.html" style="text-decoration:none">Start exploring →</a></p>
+  </div>
+</div>
+
+<p style="font-size: 25px; font-style: Arial; padding-left: 30px;"><b>Currently Trending Games</b></p>
+
+<div class="row-pics">
+  <div class="column-pics">
+    <div class="img-comp-container">
+      <div class="img-comp-img">
+        <img src="img\Apex2.png" width="300" height="175">
+      </div>
+      <div class="img-comp-img img-comp-overlay">
+        <img src="img\CODM.png" width="300" height="175">
+      </div>
+    </div>
+  </div>
+  <div class="column-pics">
+    <div class="img-comp-container">
+      <div class="img-comp-img">
+        <img src="img\Outlast.png" width="300" height="175">
+      </div>
+      <div class="img-comp-img img-comp-overlay">
+        <img src="img\Jedi.png" width="300" height="175">
+      </div>
+    </div>
+  </div>
+  <div class="column-pics">
+    <div class="img-comp-container">
+      <div class="img-comp-img">
+        <img src="img\ml.png" width="300" height="175">
+      </div>
+      <div class="img-comp-img img-comp-overlay">
+        <img src="img\l4d.png" width="300" height="175">
+      </div>
+    </div>
+  </div>
+  <div class="column-pics">
+    <div class="img-comp-container">
+      <div class="img-comp-img">
+        <img src="img\valo.png" width="300" height="175">
+      </div>
+      <div class="img-comp-img img-comp-overlay">
+        <img src="img\bs.png" width="300" height="175">
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+/*Execute a function that will execute an image compare function for each element with the img-comp-overlay class:*/
+initComparisons();
+</script>
+
+
+<footer>
+  <div class="row">
+  <div class="column">
+    <h4>PC Games</h4>
+    <p style="font-size: 10px;">
+      Star Wars Jedi Survivor <br>
+      Left 4 Dead <br>
+      Valorant
+    </p>
+  </div>
+  <div class="column">
+    <h4>Mobile Games</h4>
+    <p style="font-size: 10px;">
+      Mobile Legends<br>
+      Brawl Stars<br>
+      Call of Duty Mobile<br>
+    </p>
+  </div>
+  <div class="column">
+    <h4>Community</h4>
+    <p style="font-size: 10px;">
+      Blogs <br>
+      Sponsors <br>
+      Creators<br>
+    </p>
+  </div>
+  <div class="column">
+    <h4>About Us</h4>
+    <p style="font-size: 10px;">
+      Developers<br>
+      Designers<br>
+      Publishers<br>
+    </p>
+  </div>
+  <div class="column">
+    <h4>Contact Us</h4>
+    <div class="logo">
+    <a href=""><img src="img\fb.webp" id="fb" height="20px" width="20px"></a>
+    <a href=""><img src="img\insta.webp" id="insta" height="20px" width="20px"></a><br>
+    <a href=""><img src="img\twit.png" id="twit" height="20px" width="20px"></a>
+    <a href=""><img src="img\ring.png" id="yt" height="20px" width="20px"></a>
+    </div>
+  </div>
+</div>
+</footer>
+
+<script>
+function openNav() {
+  document.getElementById("mySidenav").style.width = "250px";
+}
+
+function closeNav() {
+  document.getElementById("mySidenav").style.width = "0";
+}
+
+
+// Get the modal
+var modal = document.getElementById("myModal");
+
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks the button, open the modal 
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+
+
+// Get the modal
+var modal = document.getElementById("myModal2");
+
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn2");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close2")[0];
+
+// When the user clicks the button, open the modal 
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+</script>
+
+</body>
+</html>
